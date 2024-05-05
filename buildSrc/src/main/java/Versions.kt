@@ -18,6 +18,7 @@ object Versions {
     const val ANDROIDX_CORE_SPLASH_SCREEN_VERSION = "1.0.1"
 
     const val CHUCKER_VERSION = "3.5.2"
+    const val COIL_COMPOSE_VERSION = "2.4.0"
     const val COMPOSE_BOM_VERSION = "2024.04.00"
     const val ACTIVITY_COMPOSE = "1.9.0"
     const val COMPOSE_COMPILER_VERSION = "1.4.6"

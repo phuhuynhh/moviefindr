@@ -40,6 +40,7 @@ android {
     buildTypes {
         getByName(BuildType.RELEASE) {
             isMinifyEnabled = false
+            isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
 
             signingConfig = signingConfigs[BuildType.RELEASE]
@@ -89,9 +90,6 @@ android {
     }
 
 
-
-
-
 }
 
 dependencies {
@@ -114,7 +112,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
 
 
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil-compose:${Versions.COIL_COMPOSE_VERSION}")
 
     implementation("androidx.navigation:navigation-compose:${Versions.COMPOSE_NAVIGATION_VERSION}")
     implementation("com.google.accompanist:accompanist-permissions:${Versions.ACCOMPANIST_PERMISSIONS_VERSION}")
@@ -130,9 +128,6 @@ dependencies {
 
     debugImplementation("com.github.chuckerteam.chucker:library:${Versions.CHUCKER_VERSION}")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:${Versions.CHUCKER_VERSION}")
-
-//    implementation("com.github.BILLyTheLiTTle:LazyColumns:0.3.7")
-
 
     // Unit test
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES_VERSION}")
