@@ -3,7 +3,6 @@ package com.whatmovie.app.compose.ui.component.messagebar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import timber.log.Timber
 
 class MessageBarState {
     var success by mutableStateOf<String?>(null)
@@ -27,7 +26,6 @@ class MessageBarState {
         updated = !updated
     }
     fun clear(){
-        Timber.d("clear")
         clear = true
         updated = !updated
     }

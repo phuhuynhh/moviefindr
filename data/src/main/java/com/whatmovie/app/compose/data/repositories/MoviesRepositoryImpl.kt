@@ -14,7 +14,6 @@ import com.whatmovie.app.compose.domain.models.PaginatedList
 import com.whatmovie.app.compose.domain.repositories.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
-import timber.log.Timber
 import javax.inject.Inject
 
 class MoviesRepositoryImpl @Inject constructor(
@@ -32,7 +31,6 @@ class MoviesRepositoryImpl @Inject constructor(
         }.flowOn(dispatchersProvider.io)
 
     override suspend fun getTrendingMovies(page: Int): DataResult<PaginatedList<MovieInfo>, DataError> {
-        Timber.d("getTrendingMovies($page)")
         val data = moviesStorage.getMoviesByPage(page)
         return if (data != null) {
             DataResult.Success(
@@ -52,7 +50,6 @@ class MoviesRepositoryImpl @Inject constructor(
 
 
     override suspend fun fetchRemoteTrending(page: Int): DataResult<PaginatedList<MovieInfo>, DataError> {
-        Timber.d("FetchRemote movies : $page")
         val remoteData = handleApi { apiService.getTrendingMovies(page) }
         val result = when (remoteData) {
             is NetworkResult.Error -> DataResult.Error(NetworkErrorHandler.errorCode(remoteData.code))

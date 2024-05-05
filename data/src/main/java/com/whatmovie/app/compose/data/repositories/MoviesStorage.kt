@@ -5,7 +5,6 @@ import com.whatmovie.app.compose.data.database.dao.MoviesDao
 import com.whatmovie.app.compose.data.database.model.Movie
 import com.whatmovie.app.compose.data.database.model.MoviePage
 import com.whatmovie.app.compose.domain.models.PaginatedList
-import timber.log.Timber
 import javax.inject.Inject
 
 interface MoviesStorage {
@@ -26,7 +25,6 @@ class LocalMoviesStorage @Inject constructor(
 
     override fun getMoviesByPage(page: Int): PaginatedList<Movie>? {
         val movies = moviesDao.getMoviesForPage(page)
-        Timber.d("Movies(page=${page})")
         if (movies.isEmpty()) return null
         val totalPage = moviePageDao.getTotalPages()
         val totalResult = moviesDao.getTotalMovies()
@@ -36,7 +34,6 @@ class LocalMoviesStorage @Inject constructor(
             totalPage,
             totalResult
         )
-        Timber.d("Page Data = $pageData")
         return pageData
     }
 }
