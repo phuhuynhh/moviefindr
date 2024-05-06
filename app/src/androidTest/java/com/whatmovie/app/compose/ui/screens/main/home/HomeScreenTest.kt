@@ -6,6 +6,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.lifecycle.SavedStateHandle
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.compose.AppTheme
 import com.whatmovie.app.compose.data.remote.services.NetworkObserver
@@ -33,6 +34,7 @@ class HomeScreenTest {
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     private val mockGetMoviesUseCase: GetMoviesUseCase = mockk()
+    private val savedStateHandle: SavedStateHandle = mockk()
 
     private lateinit var networkObserver: NetworkObserver
     private lateinit var mockContext: Context
@@ -69,18 +71,22 @@ class HomeScreenTest {
 
 
         every { mockGetMoviesUseCase() } returns flowOf(successMovieInfoDataResult)
+        every { savedStateHandle.get<String>("QUERY_STRING") } returns ""
+        every { savedStateHandle["QUERY_STRING"] = "" } returns Unit
+
 
         viewModel = HomeViewModel(
             mockGetMoviesUseCase,
             TestDispatchersProvider,
-            networkObserver
+            networkObserver,
+            savedStateHandle
         )
     }
 
 
     @Test
     fun when_entering_the_Home_screen__it_shows_UI_correctly() = initComposable {
-        onNodeWithTag("What Movie!").assertIsDisplayed()
+        onNodeWithTag("Movie Findr").assertIsDisplayed()
     }
 
 //    @Test
